@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SupermarketConsoleApp.Payments.Interface
 {
-    internal interface IPaymentForm
+    public interface IPaymentForm
     {
-        void Count(List<Product> Basket);
+        void Count(List<Product> Basket,bool LoyaltyCard, bool CourierDelivery,CashRegister cashRegister);
     }
 }
