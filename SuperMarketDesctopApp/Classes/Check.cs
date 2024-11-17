@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SupermarketConsoleApp.Classes
 {
-    class Check
+    public class Check
     {
         CashRegister CashRegister;
         DateTime Time = DateTime.Now;

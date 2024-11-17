@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SupermarketConsoleApp.Classes
 {
-    internal class Product
+    public class Product
     {
         string Name;
         int ProductId;
@@ -24,36 +24,20 @@ namespace SupermarketConsoleApp.Classes
         {
             if(string.IsNullOrEmpty(name))
             {
-                Console.WriteLine("Помилка: Назва продукту не може бути пустою");
+                MessageBox.Show("Помилка: Назва продукту не може бути пустою","Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (Products.Any(p => p.Name == name))
             {
-                Console.WriteLine($"Помилка: Товар {name} вже iснує ");
+                MessageBox.Show($"Помилка: Товар {name} вже iснує ", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             Products.Add(new Product(name, Products.Count, price));
         }
 
-        public static void AddProduct(List<Product> products) 
-        {
-            Console.WriteLine("Вкажiть назву товару");
-            string name = Console.ReadLine();
-
-            Console.WriteLine("Вкажiть цiну товару (Якщо цiна з копiйками вказувати у форматi[0,50])");
-            double price;
-
-            while (!double.TryParse(Console.ReadLine(), out price))
-            {
-                Console.WriteLine("Помилка: Невірний формат введення спробуйте ще раз:");
-            };
-
-            CreateProduct(products, name, price);
-        }
-
-        public void GetInfo() { Console.WriteLine($"Id:{ProductId} Назва: {Name} Цiна: {Price}"); }
+        public override string ToString() { return ($"Id:{ProductId} Назва: {Name} Цiна: {GetPrice()} Кількість:{Quantity}"); }
 
         public double GetPrice() { return Price * Quantity; }
 
