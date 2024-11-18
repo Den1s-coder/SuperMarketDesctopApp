@@ -27,13 +27,6 @@ namespace SupermarketConsoleApp.Classes
             cashRegister.GetLogger().Add(new Check(cashRegister, PaymentForm, amount));
         }
 
-        public static void ShowTransactions(List<Check> Log)
-        {
-            Console.WriteLine();
-            foreach (Check Logs in Log)
-            {
-                Console.WriteLine($"{Logs.Time} => Касса №{Logs.CashRegister.GetId()}, Оплата на сумму = {Logs.Amount}, Форма оплати {Logs.PaymentForm}");
-            }
-        }
+        public override string ToString(){return ($"{Time} => Касса №{CashRegister.GetId()}, Оплата на сумму = {Amount}, Форма оплати {PaymentForm}"); }
     }
 }
