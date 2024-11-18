@@ -36,14 +36,14 @@
             listBox1.FormattingEnabled = true;
             listBox1.Location = new Point(42, 30);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(323, 344);
+            listBox1.Size = new Size(654, 184);
             listBox1.TabIndex = 0;
             // 
             // TransactionsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(399, 400);
+            ClientSize = new Size(739, 258);
             Controls.Add(listBox1);
             Name = "TransactionsForm";
             Text = "Transactions";
