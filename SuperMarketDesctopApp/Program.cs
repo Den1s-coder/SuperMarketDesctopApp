@@ -20,7 +20,7 @@ namespace SuperMarketDesctopApp
             Product.CreateProduct(Products, "Pineapple", 15.50);
             Product.CreateProduct(Products, "Water", 5.30);
 
-            CashRegister cashRegister = CashRegister.CreateCashRegister(1, "Model_1", Products);
+            CashRegister cashRegister = CashRegister.CreateCashRegister(1, "Model_1", Products, "Oleksiivka_52b");
 
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm(Products,cashRegister));
