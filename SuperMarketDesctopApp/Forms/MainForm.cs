@@ -17,9 +17,13 @@ namespace SuperMarketDesctopApp
         private void Check()
         {
             if (checkBox1.Checked == true) { _cashRegister.CardPayment = true; }
+            else  _cashRegister.CardPayment = false;
             if (checkBox2.Checked == true) { _cashRegister.OnlineOrder = true; }
+            else _cashRegister.OnlineOrder = false;
             if (checkBox3.Checked == true) { _cashRegister.OnlineDeliveryOrder = true; }
-            if (checkBox4.Checked == true) { _cashRegister.CashOnlineDeliveryOrder = true; }
+            else _cashRegister.OnlineDeliveryOrder = false;
+            if (checkBox4.Checked == true) { _cashRegister.CashOnlineOrder = true; }
+            else _cashRegister.CashOnlineOrder = false;
         }
 
         private void button4_Click(object sender, EventArgs e)
