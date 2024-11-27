@@ -16,28 +16,35 @@ namespace SupermarketConsoleApp.Classes
         List<Check> Log;
         string Model;
         List<Product> Products;
+        string Adress;
 
         public bool CardPayment = false;
         public bool OnlineOrder = false;
         public bool OnlineDeliveryOrder = false;
-        public bool CashOnlineDeliveryOrder = false;
+        public bool CashOnlineOrder = false;
 
-        private CashRegister(int id, string model, List<Product> products)
+        private CashRegister(int id, string model, List<Product> products, string adress)
         {
             Id = id;
             Model = model;
             Products = products;
             Log = new List<Check>();
+            Adress = adress;
         }
 
-        public static CashRegister CreateCashRegister(int id, string model, List<Product> products)
+        public static CashRegister CreateCashRegister(int id, string model, List<Product> products,string Adress)
         {
             if (string.IsNullOrEmpty(model))
             {
                 Console.WriteLine("Помилка: назва моделі не може бути пустою");
                 return null;
             }
-            return new CashRegister(id, model, products);
+            if (string.IsNullOrEmpty(Adress))
+            {
+                Console.WriteLine("Помилка: Адресса не може бути пустою");
+                return null;
+            }
+            return new CashRegister(id, model, products,Adress);
         }
 
         public void Withdraw(double value)
