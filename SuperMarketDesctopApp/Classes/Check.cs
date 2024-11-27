@@ -14,19 +14,20 @@ namespace SupermarketConsoleApp.Classes
         DateTime Time = DateTime.Now;
         string PaymentForm;
         double Amount;
-
-        private Check(CashRegister cashRegister, string paymentForm, double amount)
+        string OnlineFormat;
+        private Check(CashRegister cashRegister, string paymentForm, double amount, string onlineFormat)
         {
             CashRegister = cashRegister;
             PaymentForm = paymentForm;
             Amount = amount;
+            OnlineFormat = onlineFormat;
         }
 
-        public static void CheckGenerator( CashRegister cashRegister, double amount, string PaymentForm)
+        public static void CheckGenerator( CashRegister cashRegister, double amount, string PaymentForm,string onlineFormat)
         {
-            cashRegister.GetLogger().Add(new Check(cashRegister, PaymentForm, amount));
+            cashRegister.GetLogger().Add(new Check(cashRegister, PaymentForm, amount,onlineFormat));
         }
 
-        public override string ToString(){return ($"{Time} => Касса №{CashRegister.GetId()}, Оплата на сумму = {Amount}, Форма оплати {PaymentForm}"); }
+        public override string ToString(){return ($"{OnlineFormat}::{Time} => Касса №{CashRegister.GetId()}, Оплата на сумму = {Amount}, Форма оплати {PaymentForm}"); }
     }
 }
