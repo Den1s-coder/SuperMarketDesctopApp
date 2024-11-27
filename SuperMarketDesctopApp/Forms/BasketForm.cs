@@ -27,9 +27,9 @@ namespace SuperMarketDesctopApp.Forms
 
         private void LoadProducts(List<Product> products)
         {
-            foreach (var product in products) // Припускаємо, що є список Products
+            foreach (var product in products) 
             {
-                listBox1.Items.Add(product); // Додаємо товар в ListBox доступних
+                listBox1.Items.Add(product); 
             }
         }
 
