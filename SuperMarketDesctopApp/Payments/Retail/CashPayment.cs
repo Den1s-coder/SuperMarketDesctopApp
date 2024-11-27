@@ -18,7 +18,7 @@ namespace SuperMarketDesctopApp.Payments.Retail
 
         }
 
-        public void Count(List<Product> Basket, bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister)
+        public void Count(List<Product> Basket, bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister, string onlineFormat)
         {
             foreach (var product in Basket)
             {
@@ -31,7 +31,7 @@ namespace SuperMarketDesctopApp.Payments.Retail
 
             string PaymentFormat = "готівка";
 
-            PayableForm payableForm = new PayableForm(Amount, cashRegister, PaymentFormat);
+            PayableForm payableForm = new PayableForm(Amount, cashRegister, PaymentFormat, onlineFormat);
             payableForm.ShowDialog();
 
             Basket.Clear();
