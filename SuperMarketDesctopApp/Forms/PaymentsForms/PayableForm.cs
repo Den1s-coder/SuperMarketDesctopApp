@@ -23,12 +23,15 @@ namespace SuperMarketDesctopApp.Forms.PaymentsForms
 
         private string _paymentFormat;
 
-        public PayableForm(double amount,CashRegister cashRegister,string PaymentFormat)
+        private string _onlineFormat;
+
+        public PayableForm(double amount,CashRegister cashRegister,string PaymentFormat,string onlineFormat)
         {
             InitializeComponent();
             _amount = amount;
             _cashRegister = cashRegister;
             _paymentFormat = PaymentFormat;
+            _onlineFormat = onlineFormat;
             amountUpdate();
         }
 
@@ -45,7 +48,7 @@ namespace SuperMarketDesctopApp.Forms.PaymentsForms
                 if (_amount > Paid) { MessageBox.Show("Покупцем надано меньше готівки ніж потрібно для сплати"); }
                 else
                 {
-                    Check.CheckGenerator(_cashRegister, _amount, _paymentFormat);
+                    Check.CheckGenerator(_cashRegister, _amount, _paymentFormat, _onlineFormat);
 
                     double Rest = Paid - _amount;
 

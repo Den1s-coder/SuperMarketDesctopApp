@@ -34,11 +34,14 @@
             label1 = new Label();
             radioButton2 = new RadioButton();
             radioButton1 = new RadioButton();
+            button6 = new Button();
+            button5 = new Button();
+            button4 = new Button();
             SuspendLayout();
             // 
             // button3
             // 
-            button3.Location = new Point(502, 170);
+            button3.Location = new Point(498, 111);
             button3.Name = "button3";
             button3.Size = new Size(192, 110);
             button3.TabIndex = 5;
@@ -48,7 +51,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(304, 170);
+            button2.Location = new Point(300, 111);
             button2.Name = "button2";
             button2.Size = new Size(192, 110);
             button2.TabIndex = 4;
@@ -58,7 +61,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(106, 170);
+            button1.Location = new Point(102, 111);
             button1.Name = "button1";
             button1.Size = new Size(192, 110);
             button1.TabIndex = 3;
@@ -97,11 +100,44 @@
             radioButton1.Text = "Картка лояльності";
             radioButton1.UseVisualStyleBackColor = true;
             // 
+            // button6
+            // 
+            button6.Location = new Point(498, 227);
+            button6.Name = "button6";
+            button6.Size = new Size(192, 100);
+            button6.TabIndex = 17;
+            button6.Text = "Кур'єром онлайн";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(300, 227);
+            button5.Name = "button5";
+            button5.Size = new Size(192, 100);
+            button5.TabIndex = 16;
+            button5.Text = "Карткою онлайн";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(102, 227);
+            button4.Name = "button4";
+            button4.Size = new Size(192, 100);
+            button4.TabIndex = 15;
+            button4.Text = "Готівкою онлайн";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // RetailPaymentForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button6);
+            Controls.Add(button5);
+            Controls.Add(button4);
             Controls.Add(radioButton2);
             Controls.Add(radioButton1);
             Controls.Add(label1);
@@ -122,5 +158,8 @@
         private Label label1;
         private RadioButton radioButton2;
         private RadioButton radioButton1;
+        private Button button6;
+        private Button button5;
+        private Button button4;
     }
 }

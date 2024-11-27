@@ -34,11 +34,14 @@
             label1 = new Label();
             radioButton1 = new RadioButton();
             radioButton2 = new RadioButton();
+            button4 = new Button();
+            button5 = new Button();
+            button6 = new Button();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(103, 167);
+            button1.Location = new Point(109, 104);
             button1.Name = "button1";
             button1.Size = new Size(192, 110);
             button1.TabIndex = 0;
@@ -48,7 +51,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(301, 167);
+            button2.Location = new Point(307, 104);
             button2.Name = "button2";
             button2.Size = new Size(192, 110);
             button2.TabIndex = 1;
@@ -58,7 +61,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(499, 167);
+            button3.Location = new Point(505, 104);
             button3.Name = "button3";
             button3.Size = new Size(192, 110);
             button3.TabIndex = 2;
@@ -97,11 +100,44 @@
             radioButton2.Text = "Кур'єрська доставка(для оплати в магазині)";
             radioButton2.UseVisualStyleBackColor = true;
             // 
+            // button4
+            // 
+            button4.Location = new Point(109, 224);
+            button4.Name = "button4";
+            button4.Size = new Size(192, 100);
+            button4.TabIndex = 12;
+            button4.Text = "Готівкою онлайн";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(307, 224);
+            button5.Name = "button5";
+            button5.Size = new Size(192, 100);
+            button5.TabIndex = 13;
+            button5.Text = "Карткою онлайн";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(505, 224);
+            button6.Name = "button6";
+            button6.Size = new Size(192, 100);
+            button6.TabIndex = 14;
+            button6.Text = "Кур'єром онлайн";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
             // BulkPaymentForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button6);
+            Controls.Add(button5);
+            Controls.Add(button4);
             Controls.Add(radioButton2);
             Controls.Add(radioButton1);
             Controls.Add(label1);
@@ -122,5 +158,8 @@
         private Label label1;
         private RadioButton radioButton1;
         private RadioButton radioButton2;
+        private Button button4;
+        private Button button5;
+        private Button button6;
     }
 }

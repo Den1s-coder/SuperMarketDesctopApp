@@ -1,5 +1,5 @@
 ﻿using SupermarketConsoleApp.Classes;
-using SuperMarketDesctopApp.Payments.Bulk;
+using SuperMarketDesctopApp.Payments.Retail;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,11 +18,12 @@ namespace SuperMarketDesctopApp.Forms
         private bool LoyaltyCard = false;
         private bool Delivary = false;
         private CashRegister _cashRegister;
-        public RetailPaymentForm(List<Product> basket,CashRegister cashRegister)
+        public RetailPaymentForm(List<Product> basket, CashRegister cashRegister)
         {
             InitializeComponent();
             _basket = basket;
             _cashRegister = cashRegister;
+            UpdateButtonStates();
         }
 
         private void Check()
@@ -33,28 +34,52 @@ namespace SuperMarketDesctopApp.Forms
 
         private void UpdateButtonStates()
         {
-            button2.Enabled = !(_cashRegister.CardPayment);
+            button2.Enabled = _cashRegister.CardPayment;
+            button4.Enabled = _cashRegister.OnlineOrder && _cashRegister.CashOnlineOrder;
+            button5.Enabled = _cashRegister.OnlineOrder && _cashRegister.CardPayment;
+            button6.Enabled = _cashRegister.OnlineOrder && _cashRegister.OnlineDeliveryOrder;
         }
 
         private void button1_Click(object sender, EventArgs e) //готівка магазин
         {
             Check();
-            BulkCashPayment bulkCashPayment = new BulkCashPayment();
-            bulkCashPayment.Count(_basket, LoyaltyCard, Delivary, _cashRegister);
+            CashPayment CashPayment = new CashPayment();
+            CashPayment.Count(_basket, LoyaltyCard, Delivary, _cashRegister, "offline");
         }
 
         private void button2_Click(object sender, EventArgs e) // картка магазин
         {
             Check();
-            BulkCreditCardPayment bulkCreditCardPayment = new BulkCreditCardPayment();
-            bulkCreditCardPayment.Count(_basket, LoyaltyCard, Delivary, _cashRegister);
+            CreditCardPayment CreditCardPayment = new CreditCardPayment();
+            CreditCardPayment.Count(_basket, LoyaltyCard, Delivary, _cashRegister, "offline");
         }
 
         private void button3_Click(object sender, EventArgs e) // готівка кур'єр
         {
             Check();
-            BulkСourierPayment bulkCourierPayment = new BulkСourierPayment();
-            bulkCourierPayment.Count(_basket, LoyaltyCard, Delivary, _cashRegister);
+            СourierPayment CourierPayment = new СourierPayment();
+            CourierPayment.Count(_basket, LoyaltyCard, Delivary, _cashRegister, "offline");
+        }
+
+        private void button4_Click(object sender, EventArgs e) //готівка магазин онлайн
+        {
+            Check();
+            CashPayment CashPayment = new CashPayment();
+            CashPayment.Count(_basket, LoyaltyCard, Delivary, _cashRegister, "online");
+        }
+
+        private void button5_Click(object sender, EventArgs e)// картка магазин онлайн
+        {
+            Check();
+            CreditCardPayment CreditCardPayment = new CreditCardPayment();
+            CreditCardPayment.Count(_basket, LoyaltyCard, Delivary, _cashRegister, "online");
+        }
+
+        private void button6_Click(object sender, EventArgs e)//готівка магазин онлайн
+        {
+            Check();
+            СourierPayment CourierPayment = new СourierPayment();
+            CourierPayment.Count(_basket, LoyaltyCard, Delivary, _cashRegister, "online");
         }
     }
 }
