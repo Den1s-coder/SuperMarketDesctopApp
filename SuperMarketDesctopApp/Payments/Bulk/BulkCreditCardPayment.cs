@@ -22,7 +22,7 @@ namespace SuperMarketDesctopApp.Payments.Bulk
             CashRegister = cashRegister;
         }
 
-        public void Count(List<Product> Basket,bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister)
+        public void Count(List<Product> Basket,bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister, string onlineFormat)
         {
             foreach (var product in Basket)
             {
@@ -33,12 +33,12 @@ namespace SuperMarketDesctopApp.Payments.Bulk
 
             if (CourierDelivery == true) Amount += 50;
 
-            ProcessPayment(Amount,cashRegister);
+            ProcessPayment(Amount, cashRegister, onlineFormat);
         }
 
-        private void ProcessPayment(double amount,CashRegister cashRegister)
+        private void ProcessPayment(double amount,CashRegister cashRegister,string onlineFormat)
         {
-            Check.CheckGenerator(cashRegister, amount, "картка");
+            Check.CheckGenerator(cashRegister, amount, "картка", onlineFormat);
 
             Console.WriteLine($"Оплата карткою на сумму {amount} успiшна!");
         }

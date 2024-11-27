@@ -11,13 +11,14 @@ namespace SuperMarketDesctopApp.Payments.Bulk
 {
     internal struct BulkСourierPayment : IPaymentForm
     {
+
         double Amount;
 
-        public BulkСourierPayment(CashRegister cashRegister)
+        public BulkСourierPayment()
         {
         }
 
-        public void Count(List<Product> Basket, bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister)
+        public void Count(List<Product> Basket, bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister, string onlineFormat)
         {
             CourierDelivery = true;
 
@@ -30,7 +31,7 @@ namespace SuperMarketDesctopApp.Payments.Bulk
 
             string PaymentFormat = "Кур'єром";
 
-            PayableForm payableForm = new PayableForm(Amount, cashRegister, PaymentFormat);
+            PayableForm payableForm = new PayableForm(Amount, cashRegister, PaymentFormat, onlineFormat);
             payableForm.ShowDialog();
 
             Basket.Clear();
