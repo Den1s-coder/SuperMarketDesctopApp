@@ -91,7 +91,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "CashForm";
-            Text = "CashForm";
+            Text = "Взаємодія з готівкою";
             Load += CashForm_Load;
             ResumeLayout(false);
             PerformLayout();

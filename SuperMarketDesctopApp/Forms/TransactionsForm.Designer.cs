@@ -46,7 +46,7 @@
             ClientSize = new Size(739, 258);
             Controls.Add(listBox1);
             Name = "TransactionsForm";
-            Text = "Transactions";
+            Text = "Транзакції";
             ResumeLayout(false);
         }
 
