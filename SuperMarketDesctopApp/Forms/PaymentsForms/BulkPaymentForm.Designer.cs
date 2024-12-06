@@ -145,7 +145,7 @@
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "BulkPaymentForm";
-            Text = "BulkPaymentForm";
+            Text = "Формат оплати оптом";
             ResumeLayout(false);
             PerformLayout();
         }

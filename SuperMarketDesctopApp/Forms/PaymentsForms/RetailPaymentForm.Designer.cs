@@ -145,7 +145,7 @@
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "RetailPaymentForm";
-            Text = "PaymentsForm";
+            Text = "Формат оплати роздріб";
             ResumeLayout(false);
             PerformLayout();
         }

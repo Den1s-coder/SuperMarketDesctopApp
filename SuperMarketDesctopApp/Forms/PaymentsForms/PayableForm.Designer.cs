@@ -90,7 +90,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "PayableForm";
-            Text = "PayableForm";
+            Text = "Оплата";
             ResumeLayout(false);
             PerformLayout();
         }
