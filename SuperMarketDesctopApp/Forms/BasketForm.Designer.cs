@@ -114,7 +114,7 @@
             Controls.Add(button1);
             Controls.Add(listBox1);
             Name = "BasketForm";
-            Text = "Basket";
+            Text = "Корзина";
             ResumeLayout(false);
             PerformLayout();
         }

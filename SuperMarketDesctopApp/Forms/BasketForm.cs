@@ -97,15 +97,14 @@ namespace SuperMarketDesctopApp.Forms
                 return;
             }
 
-            // Перевіряємо, чи є оптова покупка
             if (IsWholesalePurchase())
             {
-                var paymentForm = new BulkPaymentForm(Basket, _cashRegister); // Створення форми для оплати
+                var paymentForm = new BulkPaymentForm(Basket, _cashRegister); 
                 paymentForm.ShowDialog();
             }
             else
             {
-                var paymentForm = new RetailPaymentForm(Basket, _cashRegister); // Створення форми для оплати
+                var paymentForm = new RetailPaymentForm(Basket, _cashRegister); 
                 paymentForm.ShowDialog();
             }
         }
