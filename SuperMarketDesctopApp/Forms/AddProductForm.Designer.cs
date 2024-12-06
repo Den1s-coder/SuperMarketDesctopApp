@@ -77,7 +77,7 @@
             label2.TabIndex = 4;
             label2.Text = "Ціна товару";
             // 
-            // AddProduct
+            // AddProductForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -87,8 +87,8 @@
             Controls.Add(maskedTextBox2);
             Controls.Add(maskedTextBox1);
             Controls.Add(button1);
-            Name = "AddProduct";
-            Text = "Form1";
+            Name = "AddProductForm";
+            Text = "Додавання товару";
             ResumeLayout(false);
             PerformLayout();
         }
