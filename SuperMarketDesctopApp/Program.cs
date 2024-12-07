@@ -1,4 +1,5 @@
 using SupermarketConsoleApp.Classes;
+using SuperMarketDesctopApp.Classes;
 
 namespace SuperMarketDesctopApp
 {
@@ -20,7 +21,11 @@ namespace SuperMarketDesctopApp
             Product.CreateProduct(Products, "Pineapple", 15.50);
             Product.CreateProduct(Products, "Water", 5.30);
 
-            CashRegister cashRegister = CashRegister.CreateCashRegister(1, "Model_1", Products, "Oleksiivka_52b");
+            SuperMarket superMarket = SuperMarket.CreateSuperMarket("Class", "Oleksiivka", "AD1234",Products);
+
+            CashRegister cashRegister = CashRegister.CreateCashRegister(1, "Model_1", Products);
+
+            superMarket.AddCashRegister(cashRegister);
 
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm(Products,cashRegister));
