@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SuperMarketDesctopApp.Classes
 {
-    internal class SuperMarket
+    public class SuperMarket
     {
         string Name;
         Dictionary<int, CashRegister> CashRegisters = new Dictionary<int, CashRegister>();
@@ -19,14 +19,15 @@ namespace SuperMarketDesctopApp.Classes
         string EDRPOU;
 
 
-        private SuperMarket(string name, string adress, string edrpou)
+        private SuperMarket(string name, string adress, string edrpou, List<Product> products)
         {
             Name = name;
             Adress = adress;
             EDRPOU = edrpou;
+            SuperMarketProducts = products; 
         }
 
-        public static SuperMarket CreateSuperMarket(string name, string adress, string edrpou)
+        public static SuperMarket CreateSuperMarket(string name, string adress, string edrpou, List<Product> products)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -44,17 +45,14 @@ namespace SuperMarketDesctopApp.Classes
                 return null;
             }
 
-            return new SuperMarket(name, adress, edrpou);
+            return new SuperMarket(name, adress, edrpou, products);
         }
 
         public void AddCashRegister(CashRegister cashRegister)
         {
+            if (CashRegisters.ContainsKey(cashRegister.GetId())) return;
+
             CashRegisters.Add(cashRegister.GetId(), cashRegister);
-        }
-
-        public void AddProduct(Product product) //TODO
-        {
-
         }
 
         public void AddTransactions(Check check) //TODO
@@ -62,5 +60,9 @@ namespace SuperMarketDesctopApp.Classes
 
         }
 
+        public Dictionary<int,CashRegister> GetCashRegisters()
+        {
+            return CashRegisters;
+        }
     }
 }
