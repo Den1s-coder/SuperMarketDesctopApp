@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using SuperMarketDesctopApp.Classes;
 
 namespace SupermarketConsoleApp.Classes
 {
@@ -16,35 +17,28 @@ namespace SupermarketConsoleApp.Classes
         List<Check> Log;
         string Model;
         List<Product> Products;
-        string Adress;
 
         public bool CardPayment = false;
         public bool OnlineOrder = false;
         public bool OnlineDeliveryOrder = false;
         public bool CashOnlineOrder = false;
 
-        private CashRegister(int id, string model, List<Product> products, string adress)
+        private CashRegister(int id, string model, List<Product> products)
         {
             Id = id;
             Model = model;
             Products = products;
             Log = new List<Check>();
-            Adress = adress;
         }
 
-        public static CashRegister CreateCashRegister(int id, string model, List<Product> products,string Adress)
+        public static CashRegister CreateCashRegister(int id, string model, List<Product> products)
         {
             if (string.IsNullOrEmpty(model))
             {
                 Console.WriteLine("Помилка: назва моделі не може бути пустою");
                 return null;
             }
-            if (string.IsNullOrEmpty(Adress))
-            {
-                Console.WriteLine("Помилка: Адресса не може бути пустою");
-                return null;
-            }
-            return new CashRegister(id, model, products,Adress);
+            return new CashRegister(id, model, products);
         }
 
         public void Withdraw(double value)
