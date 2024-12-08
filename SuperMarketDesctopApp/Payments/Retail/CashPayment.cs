@@ -1,5 +1,6 @@
 ﻿using SupermarketConsoleApp.Classes;
 using SupermarketConsoleApp.Payments.Interface;
+using SuperMarketDesctopApp.Classes;
 using SuperMarketDesctopApp.Forms.PaymentsForms;
 using System;
 using System.Collections.Generic;

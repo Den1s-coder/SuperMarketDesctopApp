@@ -1,4 +1,5 @@
 ﻿using SupermarketConsoleApp.Classes;
+using SuperMarketDesctopApp.Classes;
 using SuperMarketDesctopApp.Payments.Retail;
 using System;
 using System.Collections.Generic;

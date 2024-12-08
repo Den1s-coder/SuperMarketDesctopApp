@@ -1,4 +1,5 @@
 using SupermarketConsoleApp.Classes;
+using SuperMarketDesctopApp.Classes;
 using SuperMarketDesctopApp.Forms;
 
 namespace SuperMarketDesctopApp

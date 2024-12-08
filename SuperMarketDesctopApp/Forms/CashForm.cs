@@ -1,4 +1,4 @@
-﻿using SupermarketConsoleApp.Classes;
+﻿using SuperMarketDesctopApp.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
