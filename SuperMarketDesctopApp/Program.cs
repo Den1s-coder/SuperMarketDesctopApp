@@ -1,5 +1,6 @@
 using SupermarketConsoleApp.Classes;
 using SuperMarketDesctopApp.Classes;
+using SuperMarketDesctopApp.Forms;
 
 namespace SuperMarketDesctopApp
 {
@@ -28,7 +29,8 @@ namespace SuperMarketDesctopApp
             superMarket.AddCashRegister(cashRegister);
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm(Products,cashRegister));
+
+            Application.Run(new SuperMarketForm(superMarket));
         }
     }
 }
