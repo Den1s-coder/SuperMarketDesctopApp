@@ -33,9 +33,14 @@ namespace SuperMarketDesctopApp.Classes
 
         public static CashRegister CreateCashRegister(int id, string model, List<Product> products)
         {
+            if (string.IsNullOrEmpty(id.ToString()))
+            {
+                MessageBox.Show("Помилка: ID каси не може бути пустим", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
             if (string.IsNullOrEmpty(model))
             {
-                Console.WriteLine("Помилка: назва моделі не може бути пустою");
+                MessageBox.Show("Помилка: модель не може бути пустою", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
             return new CashRegister(id, model, products);
@@ -70,6 +75,6 @@ namespace SuperMarketDesctopApp.Classes
 
         public double GetAmount() { return Amount; }
 
-        public override string ToString() { return $"Id:{Id} Модель: {Model} Готівка в касі: {Amount}"; }
+        public override string ToString() { return $"Id:{Id} Модель: {Model}"; }
     }
 }
