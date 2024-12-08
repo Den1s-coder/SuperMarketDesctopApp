@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using SuperMarketDesctopApp.Classes;
+using SupermarketConsoleApp.Classes;
 
-namespace SupermarketConsoleApp.Classes
+namespace SuperMarketDesctopApp.Classes
 {
     public class CashRegister
     {
@@ -47,7 +47,7 @@ namespace SupermarketConsoleApp.Classes
 
             if (value > Amount)
             {
-                MessageBox.Show("Помилка: на касі не достатньо грошей!", "Помилка", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Помилка: на касі не достатньо грошей!", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -66,8 +66,10 @@ namespace SupermarketConsoleApp.Classes
 
         public List<Check> GetLogger() { return Log; }
 
-        public int GetId() {  return Id; }
+        public int GetId() { return Id; }
 
         public double GetAmount() { return Amount; }
+
+        public override string ToString() { return $"Id:{Id} Модель: {Model} Готівка в касі: {Amount}"; }
     }
 }
