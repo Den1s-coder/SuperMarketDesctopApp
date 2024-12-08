@@ -50,7 +50,11 @@ namespace SuperMarketDesctopApp.Classes
 
         public void AddCashRegister(CashRegister cashRegister)
         {
-            if (CashRegisters.ContainsKey(cashRegister.GetId())) return;
+            if (CashRegisters.ContainsKey(cashRegister.GetId())) 
+            {
+                MessageBox.Show("Касса з таким ід вже існує", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             CashRegisters.Add(cashRegister.GetId(), cashRegister);
         }
@@ -60,9 +64,10 @@ namespace SuperMarketDesctopApp.Classes
 
         }
 
-        public Dictionary<int,CashRegister> GetCashRegisters()
-        {
-            return CashRegisters;
-        }
+        public Dictionary<int,CashRegister> GetCashRegisters() { return CashRegisters; }
+
+        public List<Product> GetSuperMarketProducts() { return SuperMarketProducts; }
+
+        public void RemoveCashRegister(CashRegister cashRegister) { CashRegisters.Remove(cashRegister.GetId()); }
     }
 }
