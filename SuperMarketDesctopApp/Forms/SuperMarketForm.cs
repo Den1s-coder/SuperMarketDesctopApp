@@ -19,6 +19,8 @@ namespace SuperMarketDesctopApp.Forms
         {
             listBox1.Items.Clear();
 
+            label2.Text = _superMarket.GetAmount().ToString("F2");
+
             foreach (var cashRegister in CashRegisters.Values)
             {
                 listBox1.Items.Add(cashRegister);
@@ -61,6 +63,21 @@ namespace SuperMarketDesctopApp.Forms
             else
             {
                 MessageBox.Show("Виберіть касу");
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            _superMarket.SaveSuperMarket();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SuperMarket loadedSuperMarket = SuperMarket.LoadSuperMarket();
+            if (loadedSuperMarket != null)
+            {
+                _superMarket = loadedSuperMarket;
+                LoadCashRegisters(_superMarket.GetCashRegisters());
             }
         }
     }
