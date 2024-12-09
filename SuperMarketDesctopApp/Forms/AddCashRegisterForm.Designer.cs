@@ -88,7 +88,7 @@
             Controls.Add(button1);
             Controls.Add(label1);
             Name = "AddCashRegisterForm";
-            Text = "AddCashRegisterForm";
+            Text = "Додавання каси";
             ResumeLayout(false);
             PerformLayout();
         }

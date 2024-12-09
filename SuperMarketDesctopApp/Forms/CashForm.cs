@@ -20,10 +20,10 @@ namespace SuperMarketDesctopApp.Forms
             InitializeComponent();
             _cashRegister = cashRegister;
             _amount = cashRegister.GetAmount();
-
+            Amount_Load();
         }
 
-        private void CashForm_Load(object sender, EventArgs e)
+        private void Amount_Load()
         {
             label2.Text = _amount.ToString("F2");
         }
