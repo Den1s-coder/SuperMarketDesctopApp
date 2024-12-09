@@ -1,17 +1,11 @@
 ﻿using SupermarketConsoleApp.Classes;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SuperMarketDesctopApp.Classes
 {
     public class SuperMarket
     {
-        string Name;
-        Dictionary<int, CashRegister> CashRegisters = new Dictionary<int, CashRegister>();
+        private string Name;
+        Dictionary<int, CashRegister> CashRegisters = [];
         double amount;
         List<Check> Storage = new List<Check>();
         List<Product> SuperMarketProducts = new List<Product>();
@@ -27,7 +21,7 @@ namespace SuperMarketDesctopApp.Classes
             SuperMarketProducts = products; 
         }
 
-        public static SuperMarket CreateSuperMarket(string name, string adress, string edrpou, List<Product> products)
+        public static SuperMarket? CreateSuperMarket(string name, string adress, string edrpou, List<Product> products)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -59,9 +53,13 @@ namespace SuperMarketDesctopApp.Classes
             CashRegisters.Add(cashRegister.GetId(), cashRegister);
         }
 
-        public void AddTransactions(Check check) //TODO
+        public double GetAmount()
         {
+            double superMarketAmount = 0;
 
+            foreach (var item in CashRegisters) { superMarketAmount += item.Value.GetAmount(); }
+            
+            return superMarketAmount;
         }
 
         public Dictionary<int,CashRegister> GetCashRegisters() { return CashRegisters; }
@@ -69,5 +67,105 @@ namespace SuperMarketDesctopApp.Classes
         public List<Product> GetSuperMarketProducts() { return SuperMarketProducts; }
 
         public void RemoveCashRegister(CashRegister cashRegister) { CashRegisters.Remove(cashRegister.GetId()); }
+
+        public void SaveToFile(string filename)
+        {
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filename))
+                {
+                    writer.WriteLine($"{Name},{Adress},{EDRPOU}");
+
+                    writer.WriteLine(SuperMarketProducts.Count);
+                    foreach (var product in SuperMarketProducts)
+                    {
+                        writer.WriteLine($"{product.GetName()},{product.GetPrice()},{product.GetId()}");
+                    }
+
+                    writer.WriteLine(CashRegisters.Count);
+                    foreach (var register in CashRegisters.Values)
+                    {
+                        writer.WriteLine($"{register.GetId()},{register.GetModel()},{register.GetAmount()}");
+                    }
+                }
+                MessageBox.Show("Дані успішно збережено!", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка при збереженні даних: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static SuperMarket LoadFromFile(string filename)
+        {
+            try
+            {
+                using StreamReader reader = new StreamReader(filename);
+                string[] marketInfo = reader.ReadLine().Split(',');
+                string name = marketInfo[0];
+                string address = marketInfo[1];
+                string edrpou = marketInfo[2];
+
+                List<Product> products = new List<Product>();
+                int productCount = int.Parse(reader.ReadLine());
+                for (int i = 0; i < productCount; i++)
+                {
+                    string[] productInfo = reader.ReadLine().Split(',');
+                    Product.CreateProduct(products, productInfo[0], double.Parse(productInfo[1]));
+                }
+
+                SuperMarket market = new SuperMarket(name, address, edrpou, products);
+
+                int registerCount = int.Parse(reader.ReadLine());
+                for (int i = 0; i < registerCount; i++)
+                {
+                    string[] registerInfo = reader.ReadLine().Split(',');
+                    var cashRegister = CashRegister.CreateCashRegister(
+                        int.Parse(registerInfo[0]),
+                        registerInfo[1],
+                        products);
+
+                    if (cashRegister != null)
+                    {
+                        cashRegister.SetAmount(double.Parse(registerInfo[2]));
+                        market.AddCashRegister(cashRegister);
+                    }
+                }
+
+                MessageBox.Show("Дані успішно завантажено!", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return market;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка при завантаженні даних: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        public void SaveSuperMarket()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Текстові файли (*.txt)|*.txt|Всі файли (*.*)|*.*";
+            saveFileDialog.Title = "Зберегти дані супермаркету";
+            saveFileDialog.DefaultExt = "txt";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                SaveToFile(saveFileDialog.FileName);
+            }
+        }
+
+        public static SuperMarket LoadSuperMarket()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Текстові файли (*.txt)|*.txt|Всі файли (*.*)|*.*";
+            openFileDialog.Title = "Завантажити дані супермаркету";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                return LoadFromFile(openFileDialog.FileName);
+            }
+            return null;
+        }
     }
 }
