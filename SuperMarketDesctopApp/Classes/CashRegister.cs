@@ -73,7 +73,11 @@ namespace SuperMarketDesctopApp.Classes
 
         public int GetId() { return Id; }
 
+        public string GetModel() { return Model; }
+
         public double GetAmount() { return Amount; }
+
+        public void SetAmount(double amount) { Amount = amount; }
 
         public override string ToString() { return $"Id:{Id} Модель: {Model}"; }
     }
