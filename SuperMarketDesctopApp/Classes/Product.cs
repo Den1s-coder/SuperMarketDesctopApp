@@ -39,6 +39,8 @@ namespace SupermarketConsoleApp.Classes
 
         public override string ToString() { return ($"Id:{ProductId} Назва: {Name} Цiна: {GetPrice()} Кількість:{Quantity}"); }
 
+        public string GetName() { return Name; }
+
         public double GetPrice() { return Price * Quantity; }
 
         public int GetId() { return ProductId; }
