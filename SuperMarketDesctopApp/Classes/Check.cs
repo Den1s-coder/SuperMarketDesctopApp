@@ -24,9 +24,31 @@ namespace SupermarketConsoleApp.Classes
             OnlineFormat = onlineFormat;
         }
 
-        public static void CheckGenerator( CashRegister cashRegister, double amount, string PaymentForm,string onlineFormat)
+        public static void CheckGenerator(CashRegister cashRegister, double amount, string paymentForm, string onlineFormat)
         {
-            cashRegister.GetLogger().Add(new Check(cashRegister, PaymentForm, amount,onlineFormat));
+            var check = new Check(cashRegister, paymentForm, amount, onlineFormat);
+            cashRegister.GetLogger().Add(check);
+            check.SaveTransaction(); 
+        }
+
+        private void SaveTransaction()
+        {
+            try
+            {
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string directoryPath = Path.Combine(desktopPath, "Transactions");
+                Directory.CreateDirectory(directoryPath);
+
+                string fileName = Path.Combine(directoryPath, $"Register_{CashRegister.GetId()}_transactions.txt");
+                using (StreamWriter writer = new StreamWriter(fileName, true)) 
+                {
+                    writer.WriteLine(this.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка при збереженні транзакції: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public override string ToString(){return ($"{OnlineFormat}::{Time} => Касса №{CashRegister.GetId()}, Оплата на сумму = {Amount}, Форма оплати {PaymentForm}"); }
