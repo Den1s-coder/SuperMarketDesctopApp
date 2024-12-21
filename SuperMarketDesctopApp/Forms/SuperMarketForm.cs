@@ -1,6 +1,4 @@
-﻿using SupermarketConsoleApp.Classes;
-using SuperMarketDesctopApp.Classes;
-using System.Windows.Forms;
+﻿using SuperMarketDesctopApp.Model.Classes;
 
 namespace SuperMarketDesctopApp.Forms
 {

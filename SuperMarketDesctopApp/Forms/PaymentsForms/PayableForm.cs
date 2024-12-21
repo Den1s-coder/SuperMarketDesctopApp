@@ -1,16 +1,4 @@
-﻿using SupermarketConsoleApp.Classes;
-using SupermarketConsoleApp.Payments.Interface;
-using SuperMarketDesctopApp.Classes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
+﻿using SuperMarketDesctopApp.Model.Classes;
 
 namespace SuperMarketDesctopApp.Forms.PaymentsForms
 {
