@@ -47,7 +47,7 @@ namespace SuperMarketDesctopApp
 
         private void button3_Click(object sender, EventArgs e)
         {
-            TransactionsForm transactions = new TransactionsForm(_cashRegister.GetLogger());
+            TransactionsForm transactions = new TransactionsForm(_cashRegister.Log);
             transactions.ShowDialog();
         }
 

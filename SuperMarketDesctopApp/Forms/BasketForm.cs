@@ -27,7 +27,7 @@ namespace SuperMarketDesctopApp.Forms
         {
             if (listBox1.SelectedItem is Product selectedProduct)
             {
-                var existingProduct = Basket.FirstOrDefault(p => p.GetId() == selectedProduct.GetId());
+                var existingProduct = Basket.FirstOrDefault(p => p.ProductId == selectedProduct.ProductId);
                 if (existingProduct != null)
                 {
                     existingProduct.AddQuantity();
@@ -71,7 +71,7 @@ namespace SuperMarketDesctopApp.Forms
         {
             foreach (var product in Basket)
             {
-                if (product.GetQuantity() <= 5)
+                if (product.Quantity <= 5)
                 {
                     return false;
                 }

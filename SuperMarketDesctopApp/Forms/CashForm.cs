@@ -10,13 +10,13 @@ namespace SuperMarketDesctopApp.Forms
         {
             InitializeComponent();
             _cashRegister = cashRegister;
-            _amount = cashRegister.GetAmount();
+            _amount = cashRegister.Amount;
             Amount_Load();
         }
 
         private void Amount_Load()
         {
-            label2.Text = _amount.ToString("F2");
+            label2.Text = _amount.ToString("F2"); 
         }
 
         private void button1_Click(object sender, EventArgs e)
