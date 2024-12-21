@@ -1,14 +1,8 @@
-﻿using SupermarketConsoleApp.Classes;
-using SupermarketConsoleApp.Payments.Interface;
-using SuperMarketDesctopApp.Classes;
-using SuperMarketDesctopApp.Forms.PaymentsForms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SuperMarketDesctopApp.Forms.PaymentsForms;
+using SuperMarketDesctopApp.Model.Classes;
+using SuperMarketDesctopApp.Model.Payments.Interface;
 
-namespace SuperMarketDesctopApp.Payments.Retail
+namespace SuperMarketDesctopApp.Model.Payments.Retail
 {
     internal struct CashPayment : IPaymentForm
     {

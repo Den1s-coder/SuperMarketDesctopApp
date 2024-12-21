@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SupermarketConsoleApp.Classes
+﻿namespace SuperMarketDesctopApp.Model.Classes
 {
     public class Product
     {
@@ -22,9 +16,9 @@ namespace SupermarketConsoleApp.Classes
 
         public static void CreateProduct(List<Product> Products, string name, double price)
         {
-            if(string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
             {
-                MessageBox.Show("Помилка: Назва продукту не може бути пустою","Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Помилка: Назва продукту не може бути пустою", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -37,7 +31,7 @@ namespace SupermarketConsoleApp.Classes
             Products.Add(new Product(name, Products.Count, price));
         }
 
-        public override string ToString() { return ($"Id:{ProductId} Назва: {Name} Цiна: {GetPrice()} Кількість:{Quantity}"); }
+        public override string ToString() { return $"Id:{ProductId} Назва: {Name} Цiна: {GetPrice()} Кількість:{Quantity}"; }
 
         public string GetName() { return Name; }
 

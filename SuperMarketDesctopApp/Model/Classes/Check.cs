@@ -1,13 +1,4 @@
-﻿using SupermarketConsoleApp.Payments.Interface;
-using SuperMarketDesctopApp.Classes;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SupermarketConsoleApp.Classes
+﻿namespace SuperMarketDesctopApp.Model.Classes
 {
     public class Check
     {
@@ -28,7 +19,7 @@ namespace SupermarketConsoleApp.Classes
         {
             var check = new Check(cashRegister, paymentForm, amount, onlineFormat);
             cashRegister.GetLogger().Add(check);
-            check.SaveTransaction(); 
+            check.SaveTransaction();
         }
 
         private void SaveTransaction()
@@ -40,9 +31,9 @@ namespace SupermarketConsoleApp.Classes
                 Directory.CreateDirectory(directoryPath);
 
                 string fileName = Path.Combine(directoryPath, $"Register_{CashRegister.GetId()}_transactions.txt");
-                using (StreamWriter writer = new StreamWriter(fileName, true)) 
+                using (StreamWriter writer = new StreamWriter(fileName, true))
                 {
-                    writer.WriteLine(this.ToString());
+                    writer.WriteLine(ToString());
                 }
             }
             catch (Exception ex)
@@ -51,6 +42,6 @@ namespace SupermarketConsoleApp.Classes
             }
         }
 
-        public override string ToString(){return ($"{OnlineFormat}::{Time} => Касса №{CashRegister.GetId()}, Оплата на сумму = {Amount}, Форма оплати {PaymentForm}"); }
+        public override string ToString() { return $"{OnlineFormat}::{Time} => Касса №{CashRegister.GetId()}, Оплата на сумму = {Amount}, Форма оплати {PaymentForm}"; }
     }
 }

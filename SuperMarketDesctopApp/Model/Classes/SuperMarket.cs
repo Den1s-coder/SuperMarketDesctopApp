@@ -1,6 +1,4 @@
-﻿using SupermarketConsoleApp.Classes;
-
-namespace SuperMarketDesctopApp.Classes
+﻿namespace SuperMarketDesctopApp.Model.Classes
 {
     public class SuperMarket
     {

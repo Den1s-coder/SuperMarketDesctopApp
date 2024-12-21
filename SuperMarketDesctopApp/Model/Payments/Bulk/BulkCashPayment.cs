@@ -1,14 +1,8 @@
-﻿using SupermarketConsoleApp.Classes;
-using SupermarketConsoleApp.Payments.Interface;
-using SuperMarketDesctopApp.Classes;
-using SuperMarketDesctopApp.Forms.PaymentsForms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SuperMarketDesctopApp.Forms.PaymentsForms;
+using SuperMarketDesctopApp.Model.Classes;
+using SuperMarketDesctopApp.Model.Payments.Interface;
 
-namespace SuperMarketDesctopApp.Payments.Bulk
+namespace SuperMarketDesctopApp.Model.Payments.Bulk
 {
     internal struct BulkCashPayment : IPaymentForm
     {
@@ -23,7 +17,7 @@ namespace SuperMarketDesctopApp.Payments.Bulk
             CashRegister = cashRegister;
         }
 
-        public void Count(List<Product> Basket,bool LoyaltyCard,bool CourierDelivery, CashRegister cashRegister, string onlineFormat)
+        public void Count(List<Product> Basket, bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister, string onlineFormat)
         {
             foreach (var product in Basket)
             {

@@ -1,13 +1,7 @@
-﻿using SupermarketConsoleApp.Classes;
-using SupermarketConsoleApp.Payments.Interface;
-using SuperMarketDesctopApp.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SuperMarketDesctopApp.Model.Classes;
+using SuperMarketDesctopApp.Model.Payments.Interface;
 
-namespace SuperMarketDesctopApp.Payments.Bulk
+namespace SuperMarketDesctopApp.Model.Payments.Bulk
 {
     internal struct BulkCreditCardPayment : IPaymentForm
     {

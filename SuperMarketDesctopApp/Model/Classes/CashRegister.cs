@@ -1,14 +1,4 @@
-﻿using SupermarketConsoleApp.Payments.Interface;
-using SupermarketConsoleApp.Payments;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using SupermarketConsoleApp.Classes;
-
-namespace SuperMarketDesctopApp.Classes
+﻿namespace SuperMarketDesctopApp.Model.Classes
 {
     public class CashRegister
     {
