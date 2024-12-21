@@ -17,6 +17,8 @@ namespace SuperMarketDesctopApp.Model.Payments.Bulk
             CashRegister = cashRegister;
         }
 
+        public event EventHandler<CustomerServedEvent> CustomerServed;
+
         public void Count(List<Product> Basket, bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister, string onlineFormat)
         {
             foreach (var product in Basket)

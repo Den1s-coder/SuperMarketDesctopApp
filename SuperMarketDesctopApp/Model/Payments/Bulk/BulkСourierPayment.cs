@@ -13,6 +13,8 @@ namespace SuperMarketDesctopApp.Model.Payments.Bulk
         {
         }
 
+        public event EventHandler<CustomerServedEvent> CustomerServed;
+
         public void Count(List<Product> Basket, bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister, string onlineFormat)
         {
             CourierDelivery = true;
