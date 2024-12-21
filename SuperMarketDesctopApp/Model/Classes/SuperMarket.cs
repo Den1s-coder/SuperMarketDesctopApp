@@ -42,20 +42,20 @@
 
         public void AddCashRegister(CashRegister cashRegister)
         {
-            if (CashRegisters.ContainsKey(cashRegister.GetId())) 
+            if (CashRegisters.ContainsKey(cashRegister.Id)) 
             {
                 MessageBox.Show("Касса з таким ід вже існує", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            CashRegisters.Add(cashRegister.GetId(), cashRegister);
+            CashRegisters.Add(cashRegister.Id, cashRegister);
         }
 
         public double GetAmount()
         {
             double superMarketAmount = 0;
 
-            foreach (var item in CashRegisters) { superMarketAmount += item.Value.GetAmount(); }
+            foreach (var item in CashRegisters) { superMarketAmount += item.Value.Amount; }
             
             return superMarketAmount;
         }
@@ -64,7 +64,7 @@
 
         public List<Product> GetSuperMarketProducts() { return SuperMarketProducts; }
 
-        public void RemoveCashRegister(CashRegister cashRegister) { CashRegisters.Remove(cashRegister.GetId()); }
+        public void RemoveCashRegister(CashRegister cashRegister) { CashRegisters.Remove(cashRegister.Id); }
 
         public void SaveToFile(string filename)
         {
@@ -77,13 +77,13 @@
                     writer.WriteLine(SuperMarketProducts.Count);
                     foreach (var product in SuperMarketProducts)
                     {
-                        writer.WriteLine($"{product.GetName()},{product.GetPrice()},{product.GetId()}");
+                        writer.WriteLine($"{product.Name},{product.GetPrice()},{product.ProductId}");
                     }
 
                     writer.WriteLine(CashRegisters.Count);
                     foreach (var register in CashRegisters.Values)
                     {
-                        writer.WriteLine($"{register.GetId()},{register.GetModel()},{register.GetAmount()}");
+                        writer.WriteLine($"{register.Id},{register.Model},{register.Amount}");
                     }
                 }
                 MessageBox.Show("Дані успішно збережено!", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -125,7 +125,7 @@
 
                     if (cashRegister != null)
                     {
-                        cashRegister.SetAmount(double.Parse(registerInfo[2]));
+                        cashRegister.Amount = double.Parse(registerInfo[2]);
                         market.AddCashRegister(cashRegister);
                     }
                 }

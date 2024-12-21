@@ -18,7 +18,7 @@
         public static void CheckGenerator(CashRegister cashRegister, double amount, string paymentForm, string onlineFormat)
         {
             var check = new Check(cashRegister, paymentForm, amount, onlineFormat);
-            cashRegister.GetLogger().Add(check);
+            cashRegister.Log.Add(check);
             check.SaveTransaction();
         }
 
@@ -30,7 +30,7 @@
                 string directoryPath = Path.Combine(desktopPath, "Transactions");
                 Directory.CreateDirectory(directoryPath);
 
-                string fileName = Path.Combine(directoryPath, $"Register_{CashRegister.GetId()}_transactions.txt");
+                string fileName = Path.Combine(directoryPath, $"Register_{CashRegister.Id}_transactions.txt");
                 using (StreamWriter writer = new StreamWriter(fileName, true))
                 {
                     writer.WriteLine(ToString());
@@ -42,6 +42,6 @@
             }
         }
 
-        public override string ToString() { return $"{OnlineFormat}::{Time} => Касса №{CashRegister.GetId()}, Оплата на сумму = {Amount}, Форма оплати {PaymentForm}"; }
+        public override string ToString() { return $"{OnlineFormat}::{Time} => Касса №{CashRegister.Id}, Оплата на сумму = {Amount}, Форма оплати {PaymentForm}"; }
     }
 }

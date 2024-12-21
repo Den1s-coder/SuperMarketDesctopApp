@@ -2,10 +2,10 @@
 {
     public class Product
     {
-        string Name;
-        int ProductId;
+        public string Name { get; }
+        public int ProductId { get; }
         double Price;
-        int Quantity = 1;
+        public int Quantity { get; private set; } = 1;
 
         private Product(string name, int productId, double price)
         {
@@ -33,13 +33,7 @@
 
         public override string ToString() { return $"Id:{ProductId} Назва: {Name} Цiна: {GetPrice()} Кількість:{Quantity}"; }
 
-        public string GetName() { return Name; }
-
         public double GetPrice() { return Price * Quantity; }
-
-        public int GetId() { return ProductId; }
-
-        public int GetQuantity() { return Quantity; }
 
         public void AddQuantity() { Quantity++; }
     }

@@ -2,10 +2,10 @@
 {
     public class CashRegister
     {
-        int Id;
-        double Amount = 1000;
-        List<Check> Log;
-        string Model;
+        public int Id { get; }
+        public double Amount { get; set; } = 1000;
+        public List<Check> Log { get; set; }
+        public string Model { get; }
         List<Product> Products;
 
         public bool CardPayment = false;
@@ -58,16 +58,6 @@
             MessageBox.Show($"Поповнення Успiшне на кассi = {Amount} грн", "Поповнення успішне", MessageBoxButtons.OK);
             return;
         }
-
-        public List<Check> GetLogger() { return Log; }
-
-        public int GetId() { return Id; }
-
-        public string GetModel() { return Model; }
-
-        public double GetAmount() { return Amount; }
-
-        public void SetAmount(double amount) { Amount = amount; }
 
         public override string ToString() { return $"Id:{Id} Модель: {Model}"; }
     }
