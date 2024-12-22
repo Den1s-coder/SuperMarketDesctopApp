@@ -1,4 +1,7 @@
 ﻿using SuperMarketDesctopApp.Model.Classes;
+using SuperMarketDesctopApp.Model.Event;
+using SuperMarketDesctopApp.Model.Payments.Bulk;
+using SuperMarketDesctopApp.Model.Payments.Interface;
 
 namespace SuperMarketDesctopApp.Forms.PaymentsForms
 {
@@ -10,17 +13,19 @@ namespace SuperMarketDesctopApp.Forms.PaymentsForms
 
         private CashRegister _cashRegister;
 
-        private string _paymentFormat;
-
         private string _onlineFormat;
 
-        public PayableForm(double amount,CashRegister cashRegister,string PaymentFormat,string onlineFormat)
+        private IPaymentForm _payment;
+
+        public PayableForm(double amount,CashRegister cashRegister,string onlineFormat,IPaymentForm payment)
         {
             InitializeComponent();
             _amount = amount;
             _cashRegister = cashRegister;
-            _paymentFormat = PaymentFormat;
             _onlineFormat = onlineFormat;
+            _payment = payment;
+
+            _payment.CustomerServed += PaymentCustomerServed;
             amountUpdate();
         }
 
@@ -37,11 +42,11 @@ namespace SuperMarketDesctopApp.Forms.PaymentsForms
                 if (_amount > Paid) { MessageBox.Show("Покупцем надано меньше готівки ніж потрібно для сплати"); }
                 else
                 {
-                    Check.CheckGenerator(_cashRegister, _amount, _paymentFormat, _onlineFormat);
+                    Check.CheckGenerator(_cashRegister, _onlineFormat, $"Оплата готiвкою на сумму {_amount}");
 
                     double Rest = Paid - _amount;
 
-                    MessageBox.Show($"Оплата готiвкою на сумму {_amount} успiшна ваша решта {Math.Round(Rest, 2)}");
+                    _payment.OnCustomerServed(new CustomerServedEvent(_amount, false, false));
                 }
             }
             else
@@ -49,6 +54,11 @@ namespace SuperMarketDesctopApp.Forms.PaymentsForms
                 MessageBox.Show("Помилка: Невірний формат ціни");
             }
         }
-        
+
+        private void PaymentCustomerServed(object sender, CustomerServedEvent e)
+        {
+            MessageBox.Show($"Покупець обслуговуваний: Загальна сума {e.TotalAmount}, ");
+        }
+
     }
 }
