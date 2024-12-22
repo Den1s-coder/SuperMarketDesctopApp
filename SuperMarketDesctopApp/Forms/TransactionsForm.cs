@@ -4,15 +4,15 @@ namespace SuperMarketDesctopApp.Forms
 {
     public partial class TransactionsForm : Form
     {
-        private List<Check> _transaction;
-        public TransactionsForm(List<Check> transaction)
+        private List<string> _transaction;
+        public TransactionsForm(List<string> transaction)
         {
             InitializeComponent();
             _transaction = transaction;
             listBox1_update(_transaction);
         }
 
-        private void listBox1_update(List<Check> transaction) 
+        private void listBox1_update(List<string> transaction) 
         {
             foreach (var trans in transaction) 
             {
