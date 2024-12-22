@@ -4,7 +4,7 @@
     {
         public int Id { get; }
         public double Amount { get; set; } = 1000;
-        public List<Check> Log { get; set; }
+        public List<string> Log { get; private set; }
         public string Model { get; }
         List<Product> Products;
 
@@ -13,12 +13,14 @@
         public bool OnlineDeliveryOrder = false;
         public bool CashOnlineOrder = false;
 
+        public event EventHandler<string>? LogAdded;
+
         private CashRegister(int id, string model, List<Product> products)
         {
             Id = id;
             Model = model;
             Products = products;
-            Log = new List<Check>();
+            Log = new List<string>();
         }
 
         public static CashRegister CreateCashRegister(int id, string model, List<Product> products)
@@ -34,6 +36,13 @@
                 return null;
             }
             return new CashRegister(id, model, products);
+        }
+
+        public void AddLog(string logMessage)
+        {
+            Log.Add(logMessage);
+
+            LogAdded?.Invoke(this, logMessage);
         }
 
         public void Withdraw(double value)

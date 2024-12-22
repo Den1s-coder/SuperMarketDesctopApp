@@ -5,11 +5,10 @@
         private string Name;
         Dictionary<int, CashRegister> CashRegisters = [];
         double amount;
-        List<Check> Storage = new List<Check>();
+        public List<string> Storage = [];
         List<Product> SuperMarketProducts = new List<Product>();
         string Adress;
         string EDRPOU;
-
 
         private SuperMarket(string name, string adress, string edrpou, List<Product> products)
         {
@@ -48,7 +47,19 @@
                 return;
             }
 
+            cashRegister.LogAdded += OnLogAdded;
+
             CashRegisters.Add(cashRegister.Id, cashRegister);
+        }
+
+        public List<string> CollectLogs()
+        {
+            Storage.Clear(); 
+            foreach (var cashRegister in CashRegisters.Values)
+            {
+                Storage.AddRange(cashRegister.Log);
+            }
+            return Storage;
         }
 
         public double GetAmount()
@@ -164,6 +175,11 @@
                 return LoadFromFile(openFileDialog.FileName);
             }
             return null;
+        }
+
+        private void OnLogAdded(object? sender, string logMessage)
+        {
+            Storage.Add(logMessage);
         }
     }
 }

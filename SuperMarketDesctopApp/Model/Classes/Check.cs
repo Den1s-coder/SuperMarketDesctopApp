@@ -4,22 +4,26 @@
     {
         CashRegister CashRegister;
         DateTime Time = DateTime.Now;
-        string PaymentForm;
-        double Amount;
         string OnlineFormat;
-        private Check(CashRegister cashRegister, string paymentForm, double amount, string onlineFormat)
+        string Message;
+
+        private Check(CashRegister cashRegister, string onlineFormat, string message)
         {
             CashRegister = cashRegister;
-            PaymentForm = paymentForm;
-            Amount = amount;
             OnlineFormat = onlineFormat;
+            Message = message;
         }
 
-        public static void CheckGenerator(CashRegister cashRegister, double amount, string paymentForm, string onlineFormat)
+        public static void CheckGenerator(CashRegister cashRegister, string onlineFormat,string message)
         {
-            var check = new Check(cashRegister, paymentForm, amount, onlineFormat);
-            cashRegister.Log.Add(check);
+            var check = new Check(cashRegister, onlineFormat, message);
+            cashRegister.AddLog(check.ToString());
             check.SaveTransaction();
+        }
+
+        public static void LogGenerator(CashRegister cashRegister,string message)
+        {
+            cashRegister.AddLog(message);
         }
 
         private void SaveTransaction()
@@ -42,6 +46,6 @@
             }
         }
 
-        public override string ToString() { return $"{OnlineFormat}::{Time} => Касса №{CashRegister.Id}, Оплата на сумму = {Amount}, Форма оплати {PaymentForm}"; }
+        public override string ToString() { return $"{OnlineFormat}::{Time} => Касса №{CashRegister.Id}, {Message}"; }
     }
 }
