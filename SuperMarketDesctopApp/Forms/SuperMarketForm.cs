@@ -78,5 +78,11 @@ namespace SuperMarketDesctopApp.Forms
                 LoadCashRegisters(_superMarket.GetCashRegisters());
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            TransactionsForm form = new TransactionsForm(_superMarket.Storage);
+            form.Show();
+        }
     }
 }

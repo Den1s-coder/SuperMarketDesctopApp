@@ -36,6 +36,7 @@
             button5 = new Button();
             label1 = new Label();
             label2 = new Label();
+            button6 = new Button();
             SuspendLayout();
             // 
             // listBox1
@@ -58,7 +59,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(351, 193);
+            button2.Location = new Point(351, 164);
             button2.Name = "button2";
             button2.Size = new Size(257, 95);
             button2.TabIndex = 2;
@@ -68,7 +69,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(351, 348);
+            button3.Location = new Point(351, 288);
             button3.Name = "button3";
             button3.Size = new Size(257, 95);
             button3.TabIndex = 3;
@@ -114,11 +115,22 @@
             label2.TabIndex = 7;
             label2.Text = "label2";
             // 
+            // button6
+            // 
+            button6.Location = new Point(329, 398);
+            button6.Name = "button6";
+            button6.Size = new Size(116, 45);
+            button6.TabIndex = 8;
+            button6.Text = "Logs";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
             // SuperMarketForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(651, 490);
+            Controls.Add(button6);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button5);
@@ -143,5 +155,6 @@
         private Button button5;
         private Label label1;
         private Label label2;
+        private Button button6;
     }
 }
