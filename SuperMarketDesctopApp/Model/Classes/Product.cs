@@ -1,11 +1,16 @@
-﻿namespace SuperMarketDesctopApp.Model.Classes
+﻿using SuperMarketDesctopApp.Model.Event;
+
+namespace SuperMarketDesctopApp.Model.Classes
 {
     public class Product
     {
         public string Name { get; }
         public int ProductId { get; }
-        double Price;
+        private double Price { get; }
         public int Quantity { get; private set; } = 1;
+        public int StorageQuantity { get; set; } = 5;
+
+        public event EventHandler<OutOfStockEvent> ProductOutOfStock;
 
         private Product(string name, int productId, double price)
         {
@@ -31,10 +36,39 @@
             Products.Add(new Product(name, Products.Count, price));
         }
 
-        public override string ToString() { return $"Id:{ProductId} Назва: {Name} Цiна: {GetPrice()} Кількість:{Quantity}"; }
+        public bool CheckQuantity(int quantity)
+        {
+            if (quantity > StorageQuantity)
+            {
+                // Если товара недостаточно, вызываем событие
+                OnProductOutOfStock(new OutOfStockEvent(Name, StorageQuantity));
+                return false; // Возвращаем false, если товар не может быть добавлен
+            }
+            else
+            {
+                // Уменьшаем количество на складе
+                StorageQuantity -= quantity;
+                return true; // Возвращаем true, если товар можно добавить
+            }
+        }
 
+        public void Restock(int quantity)
+        {
+            if (quantity > 0)
+            {
+                StorageQuantity += quantity;
+
+                Quantity = 1;
+            }
+        }
+
+        protected virtual void OnProductOutOfStock(OutOfStockEvent e)
+        {
+            ProductOutOfStock?.Invoke(this, e);
+        }
+
+        public override string ToString() { return $"Назва: {Name} Цiна: {GetPrice()} Кількість:{StorageQuantity}"; }
         public double GetPrice() { return Price * Quantity; }
-
         public void AddQuantity() { Quantity++; }
     }
 }

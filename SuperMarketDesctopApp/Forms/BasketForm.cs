@@ -1,4 +1,5 @@
 ﻿using SuperMarketDesctopApp.Model.Classes;
+using SuperMarketDesctopApp.Model.Event;
 
 namespace SuperMarketDesctopApp.Forms
 {
@@ -13,10 +14,16 @@ namespace SuperMarketDesctopApp.Forms
             _products = products;
             _cashRegister = cashRegister;
             LoadProducts(_products);
+
+            foreach (var product in _products)
+            {
+                product.ProductOutOfStock += OnProductOutOfStock;
+            }
         }
 
         private void LoadProducts(List<Product> products)
         {
+            listBox1.Items.Clear();
             foreach (var product in products) 
             {
                 listBox1.Items.Add(product); 
@@ -27,20 +34,26 @@ namespace SuperMarketDesctopApp.Forms
         {
             if (listBox1.SelectedItem is Product selectedProduct)
             {
-                var existingProduct = Basket.FirstOrDefault(p => p.ProductId == selectedProduct.ProductId);
-                if (existingProduct != null)
+                bool isAdded = selectedProduct.CheckQuantity(1);
+                if (isAdded)
                 {
-                    existingProduct.AddQuantity();
-                }
-                else
-                {
-                    Basket.Add(selectedProduct);
-                }
+                    var existingProduct = Basket.FirstOrDefault(p => p.ProductId == selectedProduct.ProductId);
 
-                listBox2.Items.Clear();
-                foreach (var product in Basket)
-                {
-                    listBox2.Items.Add(product);
+                    if (existingProduct != null)
+                    {
+                        existingProduct.AddQuantity();
+                    }
+                    else
+                    {
+                        Basket.Add(selectedProduct);
+                    }
+
+                    listBox2.Items.Clear();
+                    foreach (var product in Basket)
+                    {
+                        listBox2.Items.Add(product);
+                    }
+                    LoadProducts(_products);
                 }
             }
             else
@@ -54,6 +67,8 @@ namespace SuperMarketDesctopApp.Forms
             if (listBox2.SelectedItem is Product selectedProduct)
             {
                 Basket.Remove(selectedProduct);
+
+                selectedProduct.Restock(selectedProduct.Quantity);
 
                 listBox2.Items.Clear();
                 foreach (var product in Basket)
@@ -96,6 +111,33 @@ namespace SuperMarketDesctopApp.Forms
             {
                 var paymentForm = new RetailPaymentForm(Basket, _cashRegister); 
                 paymentForm.ShowDialog();
+            }
+        }
+
+        public void OnProductOutOfStock(object sender, OutOfStockEvent e)
+        {
+            MessageBox.Show($"Товар {e.ProductName} відсутній на складі. Доступно {e.AvailableStock} одиниць.");
+
+            Check.LogGenerator(_cashRegister, $"Каса {_cashRegister.Id} (модель {_cashRegister.Model}): Товар {e.ProductName} відсутній.");
+
+            var result = MessageBox.Show($"Чи хочете ви додати 5 одиниць товару {e.ProductName}?","Товар відсутній",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                var product = _products.FirstOrDefault(p => p.Name == e.ProductName);
+                if (product != null)
+                {
+                    product.StorageQuantity += 5; 
+
+                    MessageBox.Show($"До товару {e.ProductName} додано 5 одиниць на склад.", "Поповнення складу", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Check.LogGenerator(_cashRegister, $"Каса {_cashRegister.Id} (модель {_cashRegister.Model}):До товару {e.ProductName} додано 5 одиниць на склад.");
+
+                    LoadProducts(_products);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Ви відмовились додавати товар {e.ProductName}.", "Без змін", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
