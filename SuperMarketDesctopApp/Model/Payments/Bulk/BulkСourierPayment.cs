@@ -1,6 +1,7 @@
 ﻿using SuperMarketDesctopApp.Model.Classes;
 using SuperMarketDesctopApp.Forms.PaymentsForms;
 using SuperMarketDesctopApp.Model.Payments.Interface;
+using SuperMarketDesctopApp.Model.Event;
 
 namespace SuperMarketDesctopApp.Model.Payments.Bulk
 {
@@ -26,12 +27,17 @@ namespace SuperMarketDesctopApp.Model.Payments.Bulk
 
             if (CourierDelivery == true) Amount += 0;
 
-            string PaymentFormat = "Кур'єром";
-
-            PayableForm payableForm = new PayableForm(Amount, cashRegister, PaymentFormat, onlineFormat);
+            PayableForm payableForm = new PayableForm(Amount, cashRegister, onlineFormat,this);
             payableForm.ShowDialog();
 
             Basket.Clear();
+
+            OnCustomerServed(new CustomerServedEvent(Amount, LoyaltyCard, CourierDelivery));
+        }
+
+        public void OnCustomerServed(CustomerServedEvent e)
+        {
+            CustomerServed?.Invoke(this, e);
         }
     }
 }

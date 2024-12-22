@@ -1,4 +1,5 @@
 ﻿using SuperMarketDesctopApp.Model.Classes;
+using SuperMarketDesctopApp.Model.Event;
 using SuperMarketDesctopApp.Model.Payments.Interface;
 
 namespace SuperMarketDesctopApp.Model.Payments.Bulk
@@ -19,7 +20,7 @@ namespace SuperMarketDesctopApp.Model.Payments.Bulk
 
         public event EventHandler<CustomerServedEvent> CustomerServed;
 
-        public void Count(List<Product> Basket,bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister, string onlineFormat)
+        public void Count(List<Product> Basket, bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister, string onlineFormat)
         {
             foreach (var product in Basket)
             {
@@ -31,13 +32,22 @@ namespace SuperMarketDesctopApp.Model.Payments.Bulk
             if (CourierDelivery == true) Amount += 50;
 
             ProcessPayment(Amount, cashRegister, onlineFormat);
+
+            OnCustomerServed(new CustomerServedEvent(Amount, LoyaltyCard, CourierDelivery));
+
+            Basket.Clear();
         }
 
-        private void ProcessPayment(double amount,CashRegister cashRegister,string onlineFormat)
+        private void ProcessPayment(double amount, CashRegister cashRegister, string onlineFormat)
         {
-            Check.CheckGenerator(cashRegister, amount, "картка", onlineFormat);
+            Check.CheckGenerator(cashRegister, onlineFormat, $"Оплата карткою на суму {amount}");
 
-            Console.WriteLine($"Оплата карткою на сумму {amount} успiшна!");
+            Console.WriteLine($"Оплата карткою на суму {amount} успішна!");
+        }
+
+        public void OnCustomerServed(CustomerServedEvent e)
+        {
+            CustomerServed?.Invoke(this, e);
         }
     }
 }

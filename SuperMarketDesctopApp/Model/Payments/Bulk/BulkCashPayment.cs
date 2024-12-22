@@ -1,5 +1,6 @@
 ﻿using SuperMarketDesctopApp.Forms.PaymentsForms;
 using SuperMarketDesctopApp.Model.Classes;
+using SuperMarketDesctopApp.Model.Event;
 using SuperMarketDesctopApp.Model.Payments.Interface;
 
 namespace SuperMarketDesctopApp.Model.Payments.Bulk
@@ -12,9 +13,9 @@ namespace SuperMarketDesctopApp.Model.Payments.Bulk
 
         double Rest;
 
-        public BulkCashPayment(CashRegister cashRegister)
+        public BulkCashPayment()
         {
-            CashRegister = cashRegister;
+
         }
 
         public event EventHandler<CustomerServedEvent> CustomerServed;
@@ -30,12 +31,17 @@ namespace SuperMarketDesctopApp.Model.Payments.Bulk
 
             if (CourierDelivery == true) Amount += 50;
 
-            string PaymentFormat = "готівка";
-
-            PayableForm payableForm = new PayableForm(Amount, cashRegister, PaymentFormat, onlineFormat);
+            PayableForm payableForm = new PayableForm(Amount, cashRegister, onlineFormat,this);
             payableForm.ShowDialog();
 
             Basket.Clear();
+
+        }
+
+        public void OnCustomerServed(CustomerServedEvent e)
+        {
+            MessageBox.Show("Событие CustomerServed вызвано!");
+            CustomerServed?.Invoke(this, e);
         }
     }
 }

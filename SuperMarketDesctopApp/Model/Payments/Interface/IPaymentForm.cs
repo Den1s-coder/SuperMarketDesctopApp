@@ -1,4 +1,5 @@
 ﻿using SuperMarketDesctopApp.Model.Classes;
+using SuperMarketDesctopApp.Model.Event;
 
 namespace SuperMarketDesctopApp.Model.Payments.Interface
 {
@@ -7,5 +8,7 @@ namespace SuperMarketDesctopApp.Model.Payments.Interface
         event EventHandler<CustomerServedEvent> CustomerServed;
 
         void Count(List<Product> Basket, bool LoyaltyCard, bool CourierDelivery, CashRegister cashRegister, string onlineFormat);
+
+        public void OnCustomerServed(CustomerServedEvent e);
     }
 }

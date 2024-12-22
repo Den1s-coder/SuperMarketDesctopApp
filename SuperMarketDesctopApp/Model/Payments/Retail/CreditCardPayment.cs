@@ -1,4 +1,5 @@
 ﻿using SuperMarketDesctopApp.Model.Classes;
+using SuperMarketDesctopApp.Model.Event;
 using SuperMarketDesctopApp.Model.Payments.Interface;
 
 namespace SuperMarketDesctopApp.Model.Payments.Retail
@@ -29,14 +30,23 @@ namespace SuperMarketDesctopApp.Model.Payments.Retail
 
             if (CourierDelivery == true) Amount += 250;
 
-            ProcessPayment(Amount,cashRegister,onlineFormat);
+            ProcessPayment(Amount, cashRegister, onlineFormat);
+
+            OnCustomerServed(new CustomerServedEvent(Amount, LoyaltyCard, CourierDelivery));
+
+            Basket.Clear();
         }
 
-        private void ProcessPayment(double amount,CashRegister cashRegister,string onlineFormat)
+        private void ProcessPayment(double amount, CashRegister cashRegister, string onlineFormat)
         {
-            Check.CheckGenerator(cashRegister, amount, "картка",onlineFormat);
+            Check.CheckGenerator(cashRegister, onlineFormat, $"Оплата карткою на суму {amount}");
 
-            MessageBox.Show($"Оплата карткою на сумму {amount} успiшна!");
+            Console.WriteLine($"Оплата карткою на суму {amount} успішна!");
+        }
+
+        public void OnCustomerServed(CustomerServedEvent e)
+        {
+            CustomerServed?.Invoke(this, e);
         }
     }
 }
