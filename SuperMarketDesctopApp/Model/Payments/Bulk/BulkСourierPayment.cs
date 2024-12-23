@@ -32,7 +32,7 @@ namespace SuperMarketDesctopApp.Model.Payments.Bulk
 
             Basket.Clear();
 
-            OnCustomerServed(new CustomerServedEvent(Amount, LoyaltyCard, CourierDelivery));
+            OnCustomerServed(new CustomerServedEvent(Amount));
         }
 
         public void OnCustomerServed(CustomerServedEvent e)

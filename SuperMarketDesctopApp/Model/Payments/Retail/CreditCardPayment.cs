@@ -32,7 +32,7 @@ namespace SuperMarketDesctopApp.Model.Payments.Retail
 
             ProcessPayment(Amount, cashRegister, onlineFormat);
 
-            OnCustomerServed(new CustomerServedEvent(Amount, LoyaltyCard, CourierDelivery));
+            OnCustomerServed(new CustomerServedEvent(Amount));
 
             Basket.Clear();
         }

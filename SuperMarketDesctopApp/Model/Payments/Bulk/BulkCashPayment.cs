@@ -40,7 +40,6 @@ namespace SuperMarketDesctopApp.Model.Payments.Bulk
 
         public void OnCustomerServed(CustomerServedEvent e)
         {
-            MessageBox.Show("Событие CustomerServed вызвано!");
             CustomerServed?.Invoke(this, e);
         }
     }

@@ -46,7 +46,7 @@ namespace SuperMarketDesctopApp.Forms.PaymentsForms
 
                     double Rest = Paid - _amount;
 
-                    _payment.OnCustomerServed(new CustomerServedEvent(_amount, false, false));
+                    _payment.OnCustomerServed(new CustomerServedEvent(_amount));
                 }
             }
             else
