@@ -41,13 +41,11 @@ namespace SuperMarketDesctopApp.Model.Payments.Bulk
         private void ProcessPayment(double amount, CashRegister cashRegister, string onlineFormat)
         {
             Check.CheckGenerator(cashRegister, onlineFormat, $"Оплата карткою на суму {amount}");
-
-            Console.WriteLine($"Оплата карткою на суму {amount} успішна!");
         }
 
         public void OnCustomerServed(CustomerServedEvent e)
         {
-            CustomerServed?.Invoke(this, e);
+            Console.WriteLine($"Оплата карткою на суму {e} успішна!");
         }
     }
 }
